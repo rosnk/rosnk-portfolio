@@ -1,0 +1,346 @@
+import {
+  ArrowUpRight,
+  BadgeCheck,
+  BrainCircuit,
+  Building2,
+  Cloud,
+  Code2,
+  DatabaseZap,
+  Mail,
+  Network,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react'
+import './App.css'
+
+const journey = [
+  {
+    period: '2025 - Present',
+    role: 'Full Stack Engineer',
+    company: 'Insulet Corporation',
+    location: 'United States',
+    detail:
+      'Building regulated MedTech software across React, TypeScript, Node.js, Python, Azure, Redis, PostgreSQL, ETL, Delta Lake, Databricks, Salesforce, and Okta integrations.',
+  },
+  {
+    period: '2024 - 2025',
+    role: 'Full Stack Engineer',
+    company: 'Satisfi Labs',
+    location: 'Tampa, FL',
+    detail:
+      'Shipped conversational AI platform work with NestJS, reusable design systems, Redis queues, GCP, Kubernetes, AlloyDB, Pinecone, and RAG architecture for contextual answers.',
+  },
+  {
+    period: '2024',
+    role: 'Full Stack Engineer',
+    company: 'ClearDhan LLC',
+    location: 'New Jersey',
+    detail:
+      'Engineered trading-platform systems with real-time market ingestion, AI/ML prediction workflows, Redis caching, GCP infrastructure, and LLM-enabled RAG patterns.',
+  },
+  {
+    period: '2020 - 2023',
+    role: 'Full Stack Software Engineer',
+    company: 'EKAA Inc',
+    location: 'Toronto, Canada',
+    detail:
+      'Designed microservice architecture with Spring Boot, Node.js, Firebase, GraphQL, Stripe, Algolia, React, TypeScript, and Expo mobile experiences.',
+  },
+  {
+    period: '2013 - 2020',
+    role: 'Founder and Product Builder',
+    company: 'Birthday Forest, Blooms, Goingto.do',
+    location: 'Nepal, Singapore, USA',
+    detail:
+      'Moved from senior frontend craft into full product ownership: mobile apps, Spring/Node APIs, AWS deployments, CMS migrations, marketplace workflows, and award-winning civic tech.',
+  },
+]
+
+const capabilities = [
+  {
+    icon: BrainCircuit,
+    title: 'Agentic AI systems',
+    copy: 'RAG architecture, LLM-assisted workflows, vector databases, AI coding, and production dashboards that compress review cycles.',
+  },
+  {
+    icon: Network,
+    title: 'Full-stack platforms',
+    copy: 'React, TypeScript, Node.js, NestJS, Spring Boot, GraphQL, REST, reusable component systems, and cross-platform React Native apps.',
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud-native delivery',
+    copy: 'Azure, GCP, Kubernetes, Cloudflare Pages, CI/CD, serverless functions, Redis, PostgreSQL, MySQL, MongoDB, AlloyDB, and AWS Aurora.',
+  },
+  {
+    icon: DatabaseZap,
+    title: 'Data and intelligence',
+    copy: 'ETL, Delta Lake, Databricks, analytics utilities, compliance signals, automation, and stakeholder-facing insight surfaces.',
+  },
+]
+
+const stack = [
+  'React',
+  'TypeScript',
+  'Node.js',
+  'NestJS',
+  'Spring Boot',
+  'Python',
+  'Azure',
+  'GCP',
+  'Redis',
+  'PostgreSQL',
+  'Databricks',
+  'Delta Lake',
+  'Pinecone',
+  'AlloyDB',
+  'GraphQL',
+  'React Native',
+]
+
+function App() {
+  return (
+    <main>
+      <nav className="nav" aria-label="Primary navigation">
+        <a className="brand" href="#top" aria-label="Roshan Karki home">
+          <span>RK</span>
+          <strong>Roshan Karki</strong>
+        </a>
+        <div className="nav-links">
+          <a href="#journey">Journey</a>
+          <a href="#portfolio">Agentic portfolio</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+
+      <section className="hero-section" id="top">
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <p className="eyebrow">
+              <Sparkles size={16} />
+              Full Stack Software Engineer
+            </p>
+            <div className="agentic-lockup">
+              <span>AGENTIC AI ENGINEER</span>
+            </div>
+            <h1>
+              Enterprise builder with an edge for intelligent, production-grade
+              systems.
+            </h1>
+            <p className="hero-lede">
+              I build modern web, cloud, data, and AI products across regulated
+              healthcare, conversational AI, trading systems, marketplaces, and
+              civic-impact startups. My work sits where polished user experience,
+              distributed architecture, and practical automation meet.
+            </p>
+            <div className="hero-actions">
+              <a className="primary-action" href="#portfolio">
+                View agentic work <ArrowUpRight size={18} />
+              </a>
+              <a
+                className="secondary-action"
+                href="https://github.com/rosnk"
+                target="_blank"
+                rel="noreferrer"
+              >
+                 <Code2 size={18} /> GitHub
+              </a>
+            </div>
+          </div>
+
+          <aside className="hero-panel" aria-label="Profile snapshot">
+            <div className="portrait-shell">
+              <img
+                src="/assets/roshan-karki-original.jpg"
+                alt="Roshan Karki"
+                className="portrait"
+              />
+              <div className="portrait-meta">
+                <span>United States</span>
+                <strong>13 years shipping software</strong>
+              </div>
+            </div>
+            <div className="signal-board">
+              <div>
+                <span>Current</span>
+                <strong>Insulet Corporation</strong>
+              </div>
+              <div>
+                <span>Focus</span>
+                <strong>AI + cloud + full stack</strong>
+              </div>
+              <div>
+                <span>Origin</span>
+                <strong>Award-winning founder</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section className="section about-section" id="about">
+        <div className="section-kicker">
+          <Code2 size={18} />
+          About
+        </div>
+        <div className="about-layout">
+          <h2>
+            A senior engineer who can turn ambiguity into shipped systems.
+          </h2>
+          <p>
+            My background spans full-stack product engineering, mobile
+            development, microservices, data platforms, AI-enabled applications,
+            and cloud operations. I have worked with startups and enterprise
+            teams worldwide, often owning the path from requirement analysis and
+            architecture to implementation, testing, deployment, documentation,
+            and CI/CD.
+          </p>
+        </div>
+      </section>
+
+      <section className="section capabilities-section">
+        <div className="capability-grid">
+          {capabilities.map((item) => {
+            const Icon = item.icon
+            return (
+              <article className="capability-card" key={item.title}>
+                <Icon size={24} />
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </article>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="section portfolio-section" id="portfolio">
+        <div className="section-kicker">
+          <Rocket size={18} />
+          Agentic Portfolio
+        </div>
+        <div className="project-showcase">
+          <div className="project-copy">
+            <p className="project-label">Featured build</p>
+            <h2>PR Release Intelligence Platform</h2>
+            <p>
+              A release-team intelligence dashboard for spotting risky pull
+              requests, missing branch propagation, and Jira compliance issues
+              before a release goes out. Built with agentic coding in Codex
+              using GPT-5.5, React, TypeScript, Vite, and TypeScript analysis
+              services.
+            </p>
+            <div className="metric-row">
+              <div>
+                <strong>PR risk</strong>
+                <span>Status, risk level, Jira validation</span>
+              </div>
+              <div>
+                <strong>Propagation</strong>
+                <span>Missing branch visibility</span>
+              </div>
+              <div>
+                <strong>Release health</strong>
+                <span>Executive-ready summary</span>
+              </div>
+            </div>
+            <div className="project-actions">
+              <a
+                className="primary-action"
+                href="https://2abc5845.pr-release-intelligence-platform.pages.dev/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Live demo <ArrowUpRight size={18} />
+              </a>
+              <a
+                className="secondary-action"
+                href="https://github.com/rosnk/pr-release-intelligence-platform"
+                target="_blank"
+                rel="noreferrer"
+              >
+                 <Code2 size={18} /> Repository
+              </a>
+            </div>
+          </div>
+          <div className="project-visual">
+            <img
+              src="/assets/release-intelligence-dashboard.png"
+              alt="PR Release Intelligence Platform dashboard"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="section journey-section" id="journey">
+        <div className="section-kicker">
+          <Building2 size={18} />
+          Career Journey
+        </div>
+        <div className="journey-header">
+          <h2>From civic-tech founder to enterprise AI platform engineer.</h2>
+        </div>
+        <div className="timeline">
+          {journey.map((item) => (
+            <article className="timeline-item" key={`${item.company}-${item.period}`}>
+              <div className="timeline-date">{item.period}</div>
+              <div className="timeline-body">
+                <h3>{item.role}</h3>
+                <p className="timeline-company">
+                  {item.company} <span>{item.location}</span>
+                </p>
+                <p>{item.detail}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section proof-section">
+        <div className="proof-card">
+          <BadgeCheck size={24} />
+          <strong>Winner, Pivot Nepal mobile app developers competition</strong>
+          <span>Birthday Forest, supported by The World Bank competition</span>
+        </div>
+        <div className="proof-card">
+          <ShieldCheck size={24} />
+          <strong>The Manthan Award, special mention</strong>
+          <span>Recognized for using information technology for social impact</span>
+        </div>
+      </section>
+
+      <section className="section stack-section">
+        <div className="section-kicker">Selected Stack</div>
+        <div className="stack-cloud">
+          {stack.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+      </section>
+
+      <footer className="footer" id="contact">
+        <div>
+          <p className="eyebrow">Available for high-trust engineering work</p>
+          <h2>Let’s build systems that make teams sharper.</h2>
+        </div>
+        <div className="footer-actions">
+          <a href="mailto:rosn_kark@outlook.com">
+            <Mail size={18} /> Email
+          </a>
+          <a
+            href="https://www.linkedin.com/in/roshan-karki-32699973"
+            target="_blank"
+            rel="noreferrer"
+          >
+             <Network size={18} /> LinkedIn
+          </a>
+          <a href="https://github.com/rosnk" target="_blank" rel="noreferrer">
+             <Code2 size={18} /> GitHub
+          </a>
+        </div>
+      </footer>
+    </main>
+  )
+}
+
+export default App
