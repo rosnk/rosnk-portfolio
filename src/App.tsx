@@ -516,6 +516,21 @@ function App() {
           </a>
         </div>
       </footer>
+
+      <a
+        className="chat-fab"
+        href="#chat"
+        aria-label="Go to the AI chat and ask Digital Roshan about my career"
+      >
+        <span className="chat-fab-badge" aria-hidden="true">
+          <Bot size={20} />
+          <span className="chat-fab-status" />
+        </span>
+        <span className="chat-fab-text">
+          <strong>Ask Digital Roshan</strong>
+          <small>Live AI chat</small>
+        </span>
+      </a>
     </main>
   )
 }

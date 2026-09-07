@@ -122,7 +122,7 @@ const installOpenRouterChat = (middlewares: MiddlewareStack, apiKey: string) => 
             'X-Title': 'Roshan Karki Portfolio',
           },
           body: JSON.stringify({
-            model: 'minimax/minimax-m3:free',
+            model: 'minimax/minimax-m3',
             messages: [
               {
                 role: 'system',

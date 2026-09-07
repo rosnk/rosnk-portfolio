@@ -113,7 +113,7 @@ export const onRequestPost = async (context: PagesContext): Promise<Response> =>
           'X-Title': 'Roshan Karki Portfolio',
         },
         body: JSON.stringify({
-          model: 'minimax/minimax-m3:free',
+          model: 'minimax/minimax-m3',
           messages: [
             {
               role: 'system',
