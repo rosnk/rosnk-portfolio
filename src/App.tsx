@@ -1,16 +1,22 @@
+import { useMemo, useState } from 'react'
+import type { FormEvent } from 'react'
 import {
   ArrowUpRight,
   BadgeCheck,
+  Bot,
   BrainCircuit,
   Building2,
   Cloud,
   Code2,
   DatabaseZap,
+  LoaderCircle,
   Mail,
   Network,
   Rocket,
+  Send,
   ShieldCheck,
   Sparkles,
+  UserRound,
 } from 'lucide-react'
 import './App.css'
 
@@ -99,7 +105,94 @@ const stack = [
   'React Native',
 ]
 
+type ChatMessage = {
+  role: 'assistant' | 'user'
+  content: string
+}
+
+const starterPrompts = [
+  'What kind of engineering roles fit Roshan best?',
+  'Tell me about Roshan’s AI and RAG experience.',
+  'Summarize Roshan’s cloud and backend background.',
+]
+
 function App() {
+  const initialMessages = useMemo<ChatMessage[]>(
+    () => [
+      {
+        role: 'assistant',
+        content:
+          'Hi, I am the digital Roshan. Ask me about my career, projects, stack, or the kind of engineering problems I am best suited to solve.',
+      },
+    ],
+    [],
+  )
+  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages)
+  const [chatInput, setChatInput] = useState('')
+  const [isChatting, setIsChatting] = useState(false)
+  const [chatError, setChatError] = useState('')
+
+  const askDigitalRoshan = async (question: string) => {
+    const trimmedQuestion = question.trim()
+
+    if (!trimmedQuestion || isChatting) {
+      return
+    }
+
+    const nextMessages: ChatMessage[] = [
+      ...messages,
+      { role: 'user', content: trimmedQuestion },
+    ]
+
+    setMessages(nextMessages)
+    setChatInput('')
+    setChatError('')
+    setIsChatting(true)
+
+    try {
+      const response = await fetch('/api/roshan-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: nextMessages.map((message) => ({
+            role: message.role,
+            content: message.content,
+          })),
+        }),
+      })
+
+      const data = (await response.json()) as { reply?: string; error?: string }
+
+      const reply = data.reply
+
+      if (!response.ok || !reply) {
+        throw new Error(data.error || 'The chat service could not answer.')
+      }
+
+      setMessages((currentMessages) => [
+        ...currentMessages,
+        { role: 'assistant', content: reply },
+      ])
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong while contacting OpenRouter.'
+      setChatError(message)
+      setMessages((currentMessages) => currentMessages.slice(0, -1))
+      setChatInput(trimmedQuestion)
+    } finally {
+      setIsChatting(false)
+    }
+  }
+
+  const handleChatSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    void askDigitalRoshan(chatInput)
+  }
+
   return (
     <main>
       <nav className="nav" aria-label="Primary navigation">
@@ -108,6 +201,7 @@ function App() {
           <strong>Roshan Karki</strong>
         </a>
         <div className="nav-links">
+          <a href="#chat">AI chat</a>
           <a href="#journey">Journey</a>
           <a href="#portfolio">Agentic portfolio</a>
           <a href="#contact">Contact</a>
@@ -268,6 +362,89 @@ function App() {
               src="/assets/release-intelligence-dashboard.png"
               alt="PR Release Intelligence Platform dashboard"
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="section chat-section" id="chat">
+        <div className="section-kicker">
+          <Bot size={18} />
+          Digital Roshan
+        </div>
+        <div className="chat-layout">
+          <div className="chat-copy">
+            <h2>Ask my AI double about my career.</h2>
+            <p>
+              This assistant answers from my public portfolio context: roles,
+              projects, technical strengths, and the engineering environments
+              where I do my best work.
+            </p>
+            <div className="starter-prompts" aria-label="Suggested questions">
+              {starterPrompts.map((prompt) => (
+                <button
+                  type="button"
+                  key={prompt}
+                  onClick={() => void askDigitalRoshan(prompt)}
+                  disabled={isChatting}
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="chat-panel" aria-label="Chat with digital Roshan">
+            <div className="chat-thread">
+              {messages.map((message, index) => {
+                const isUser = message.role === 'user'
+                const Icon = isUser ? UserRound : Bot
+
+                return (
+                  <article
+                    className={`chat-message ${isUser ? 'user-message' : 'assistant-message'}`}
+                    key={`${message.role}-${index}-${message.content.slice(0, 20)}`}
+                  >
+                    <span className="chat-avatar" aria-hidden="true">
+                      <Icon size={17} />
+                    </span>
+                    <p>{message.content}</p>
+                  </article>
+                )
+              })}
+              {isChatting ? (
+                <div className="chat-loading" aria-live="polite">
+                  <LoaderCircle size={18} />
+                  Thinking
+                </div>
+              ) : null}
+            </div>
+
+            {chatError ? <p className="chat-error">{chatError}</p> : null}
+
+            <form className="chat-form" onSubmit={handleChatSubmit}>
+              <label className="sr-only" htmlFor="career-chat-input">
+                Ask about Roshan&apos;s career
+              </label>
+              <textarea
+                id="career-chat-input"
+                value={chatInput}
+                onChange={(event) => setChatInput(event.target.value)}
+                placeholder="Ask about my career, stack, projects, or fit for a role..."
+                rows={3}
+                disabled={isChatting}
+              />
+              <button
+                type="submit"
+                aria-label="Send message"
+                disabled={isChatting || !chatInput.trim()}
+              >
+                {isChatting ? (
+                  <LoaderCircle className="chat-submit-loading" size={18} />
+                ) : (
+                  <Send size={18} />
+                )}
+              </button>
+            </form>
           </div>
         </div>
       </section>
