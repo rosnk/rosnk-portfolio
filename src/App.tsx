@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import type { FormEvent } from 'react'
+import { useMemo, useState } from "react";
+import type { FormEvent } from "react";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -17,143 +17,143 @@ import {
   ShieldCheck,
   Sparkles,
   UserRound,
-} from 'lucide-react'
-import './App.css'
+} from "lucide-react";
+import "./App.css";
 
 const journey = [
   {
-    period: '2025 - Present',
-    role: 'Full Stack Engineer',
-    company: 'Insulet Corporation',
-    location: 'United States',
+    period: "2025 - Present",
+    role: "Full Stack Engineer",
+    company: "Insulet Corporation",
+    location: "United States",
     detail:
-      'Building regulated MedTech software across React, TypeScript, Node.js, Python, Azure, Redis, PostgreSQL, ETL, Delta Lake, Databricks, Salesforce, and Okta integrations.',
+      "Building regulated MedTech software across React, TypeScript, Node.js, Python, Azure, Redis, PostgreSQL, ETL, Delta Lake, Databricks, Salesforce, and Okta integrations.",
   },
   {
-    period: '2024 - 2025',
-    role: 'Full Stack Engineer',
-    company: 'Satisfi Labs',
-    location: 'Tampa, FL',
+    period: "2024 - 2025",
+    role: "Full Stack Engineer",
+    company: "Satisfi Labs",
+    location: "Tampa, FL",
     detail:
-      'Shipped conversational AI platform work with NestJS, reusable design systems, Redis queues, GCP, Kubernetes, AlloyDB, Pinecone, and RAG architecture for contextual answers.',
+      "Shipped conversational AI platform work with NestJS, reusable design systems, Redis queues, GCP, Kubernetes, AlloyDB, Pinecone, and RAG architecture for contextual answers.",
   },
   {
-    period: '2024',
-    role: 'Full Stack Engineer',
-    company: 'ClearDhan LLC',
-    location: 'New Jersey',
+    period: "2024",
+    role: "Full Stack Engineer",
+    company: "ClearDhan LLC",
+    location: "New Jersey",
     detail:
-      'Engineered trading-platform systems with real-time market ingestion, AI/ML prediction workflows, Redis caching, GCP infrastructure, and LLM-enabled RAG patterns.',
+      "Engineered trading-platform systems with real-time market ingestion, AI/ML prediction workflows, Redis caching, GCP infrastructure, and LLM-enabled RAG patterns.",
   },
   {
-    period: '2020 - 2023',
-    role: 'Full Stack Software Engineer',
-    company: 'EKAA Inc',
-    location: 'Toronto, Canada',
+    period: "2020 - 2023",
+    role: "Full Stack Software Engineer",
+    company: "EKAA Inc",
+    location: "Toronto, Canada",
     detail:
-      'Designed microservice architecture with Spring Boot, Node.js, Firebase, GraphQL, Stripe, Algolia, React, TypeScript, and Expo mobile experiences.',
+      "Designed microservice architecture with Spring Boot, Node.js, Firebase, GraphQL, Stripe, Algolia, React, TypeScript, and Expo mobile experiences.",
   },
   {
-    period: '2013 - 2020',
-    role: 'Founder and Product Builder',
-    company: 'Birthday Forest, Blooms, Goingto.do',
-    location: 'Nepal, Singapore, USA',
+    period: "2013 - 2020",
+    role: "Founder and Product Builder",
+    company: "Birthday Forest, Blooms, Goingto.do",
+    location: "Nepal, Singapore, USA",
     detail:
-      'Moved from senior frontend craft into full product ownership: mobile apps, Spring/Node APIs, AWS deployments, CMS migrations, marketplace workflows, and award-winning civic tech.',
+      "Moved from senior frontend craft into full product ownership: mobile apps, Spring/Node APIs, AWS deployments, CMS migrations, marketplace workflows, and award-winning civic tech.",
   },
-]
+];
 
 const capabilities = [
   {
     icon: BrainCircuit,
-    title: 'Agentic AI systems',
-    copy: 'RAG architecture, LLM-assisted workflows, vector databases, AI coding, and production dashboards that compress review cycles.',
+    title: "Agentic AI systems",
+    copy: "RAG architecture, LLM-assisted workflows, vector databases, AI coding, and production dashboards that compress review cycles.",
   },
   {
     icon: Network,
-    title: 'Full-stack platforms',
-    copy: 'React, TypeScript, Node.js, NestJS, Spring Boot, GraphQL, REST, reusable component systems, and cross-platform React Native apps.',
+    title: "Full-stack platforms",
+    copy: "React, TypeScript, Node.js, NestJS, Spring Boot, GraphQL, REST, reusable component systems, and cross-platform React Native apps.",
   },
   {
     icon: Cloud,
-    title: 'Cloud-native delivery',
-    copy: 'Azure, GCP, Kubernetes, Cloudflare Pages, CI/CD, serverless functions, Redis, PostgreSQL, MySQL, MongoDB, AlloyDB, and AWS Aurora.',
+    title: "Cloud-native delivery",
+    copy: "Azure, GCP, Kubernetes, Cloudflare Pages, CI/CD, serverless functions, Redis, PostgreSQL, MySQL, MongoDB, AlloyDB, and AWS Aurora.",
   },
   {
     icon: DatabaseZap,
-    title: 'Data and intelligence',
-    copy: 'ETL, Delta Lake, Databricks, analytics utilities, compliance signals, automation, and stakeholder-facing insight surfaces.',
+    title: "Data and intelligence",
+    copy: "ETL, Delta Lake, Databricks, analytics utilities, compliance signals, automation, and stakeholder-facing insight surfaces.",
   },
-]
+];
 
 const stack = [
-  'React',
-  'TypeScript',
-  'Node.js',
-  'NestJS',
-  'Spring Boot',
-  'Python',
-  'Azure',
-  'GCP',
-  'Redis',
-  'PostgreSQL',
-  'Databricks',
-  'Delta Lake',
-  'Pinecone',
-  'AlloyDB',
-  'GraphQL',
-  'React Native',
-]
+  "React",
+  "TypeScript",
+  "Node.js",
+  "NestJS",
+  "Spring Boot",
+  "Python",
+  "Azure",
+  "GCP",
+  "Redis",
+  "PostgreSQL",
+  "Databricks",
+  "Delta Lake",
+  "Pinecone",
+  "AlloyDB",
+  "GraphQL",
+  "React Native",
+];
 
 type ChatMessage = {
-  role: 'assistant' | 'user'
-  content: string
-}
+  role: "assistant" | "user";
+  content: string;
+};
 
 const starterPrompts = [
-  'What kind of engineering roles fit Roshan best?',
-  'Tell me about Roshan’s AI and RAG experience.',
-  'Summarize Roshan’s cloud and backend background.',
-]
+  "What kind of engineering roles fit Roshan best?",
+  "Tell me about Roshan’s AI and RAG experience.",
+  "Summarize Roshan’s cloud and backend background.",
+];
 
 function App() {
   const initialMessages = useMemo<ChatMessage[]>(
     () => [
       {
-        role: 'assistant',
+        role: "assistant",
         content:
-          'Hi, I am the digital Roshan. Ask me about my career, projects, stack, or the kind of engineering problems I am best suited to solve.',
+          "Hi, I am digital Roshan. Ask me about my career, projects, stack, or the kind of engineering problems I am best suited to solve.",
       },
     ],
     [],
-  )
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages)
-  const [chatInput, setChatInput] = useState('')
-  const [isChatting, setIsChatting] = useState(false)
-  const [chatError, setChatError] = useState('')
+  );
+  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
+  const [chatInput, setChatInput] = useState("");
+  const [isChatting, setIsChatting] = useState(false);
+  const [chatError, setChatError] = useState("");
 
   const askDigitalRoshan = async (question: string) => {
-    const trimmedQuestion = question.trim()
+    const trimmedQuestion = question.trim();
 
     if (!trimmedQuestion || isChatting) {
-      return
+      return;
     }
 
     const nextMessages: ChatMessage[] = [
       ...messages,
-      { role: 'user', content: trimmedQuestion },
-    ]
+      { role: "user", content: trimmedQuestion },
+    ];
 
-    setMessages(nextMessages)
-    setChatInput('')
-    setChatError('')
-    setIsChatting(true)
+    setMessages(nextMessages);
+    setChatInput("");
+    setChatError("");
+    setIsChatting(true);
 
     try {
-      const response = await fetch('/api/roshan-chat', {
-        method: 'POST',
+      const response = await fetch("/api/roshan-chat", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           messages: nextMessages.map((message) => ({
@@ -161,37 +161,40 @@ function App() {
             content: message.content,
           })),
         }),
-      })
+      });
 
-      const data = (await response.json()) as { reply?: string; error?: string }
+      const data = (await response.json()) as {
+        reply?: string;
+        error?: string;
+      };
 
-      const reply = data.reply
+      const reply = data.reply;
 
       if (!response.ok || !reply) {
-        throw new Error(data.error || 'The chat service could not answer.')
+        throw new Error(data.error || "The chat service could not answer.");
       }
 
       setMessages((currentMessages) => [
         ...currentMessages,
-        { role: 'assistant', content: reply },
-      ])
+        { role: "assistant", content: reply },
+      ]);
     } catch (error) {
       const message =
         error instanceof Error
           ? error.message
-          : 'Something went wrong while contacting OpenRouter.'
-      setChatError(message)
-      setMessages((currentMessages) => currentMessages.slice(0, -1))
-      setChatInput(trimmedQuestion)
+          : "Something went wrong while contacting OpenRouter.";
+      setChatError(message);
+      setMessages((currentMessages) => currentMessages.slice(0, -1));
+      setChatInput(trimmedQuestion);
     } finally {
-      setIsChatting(false)
+      setIsChatting(false);
     }
-  }
+  };
 
   const handleChatSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    void askDigitalRoshan(chatInput)
-  }
+    event.preventDefault();
+    void askDigitalRoshan(chatInput);
+  };
 
   return (
     <main>
@@ -225,8 +228,9 @@ function App() {
             <p className="hero-lede">
               I build modern web, cloud, data, and AI products across regulated
               healthcare, conversational AI, trading systems, marketplaces, and
-              civic-impact startups. My work sits where polished user experience,
-              distributed architecture, and practical automation meet.
+              civic-impact startups. My work sits where polished user
+              experience, distributed architecture, and practical automation
+              meet.
             </p>
             <div className="hero-actions">
               <a className="primary-action" href="#portfolio">
@@ -238,7 +242,7 @@ function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                 <Code2 size={18} /> GitHub
+                <Code2 size={18} /> GitHub
               </a>
             </div>
           </div>
@@ -296,14 +300,14 @@ function App() {
       <section className="section capabilities-section">
         <div className="capability-grid">
           {capabilities.map((item) => {
-            const Icon = item.icon
+            const Icon = item.icon;
             return (
               <article className="capability-card" key={item.title}>
                 <Icon size={24} />
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
               </article>
-            )
+            );
           })}
         </div>
       </section>
@@ -353,7 +357,7 @@ function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                 <Code2 size={18} /> Repository
+                <Code2 size={18} /> Repository
               </a>
             </div>
           </div>
@@ -396,12 +400,12 @@ function App() {
           <div className="chat-panel" aria-label="Chat with digital Roshan">
             <div className="chat-thread">
               {messages.map((message, index) => {
-                const isUser = message.role === 'user'
-                const Icon = isUser ? UserRound : Bot
+                const isUser = message.role === "user";
+                const Icon = isUser ? UserRound : Bot;
 
                 return (
                   <article
-                    className={`chat-message ${isUser ? 'user-message' : 'assistant-message'}`}
+                    className={`chat-message ${isUser ? "user-message" : "assistant-message"}`}
                     key={`${message.role}-${index}-${message.content.slice(0, 20)}`}
                   >
                     <span className="chat-avatar" aria-hidden="true">
@@ -409,7 +413,7 @@ function App() {
                     </span>
                     <p>{message.content}</p>
                   </article>
-                )
+                );
               })}
               {isChatting ? (
                 <div className="chat-loading" aria-live="polite">
@@ -459,7 +463,10 @@ function App() {
         </div>
         <div className="timeline">
           {journey.map((item) => (
-            <article className="timeline-item" key={`${item.company}-${item.period}`}>
+            <article
+              className="timeline-item"
+              key={`${item.company}-${item.period}`}
+            >
               <div className="timeline-date">{item.period}</div>
               <div className="timeline-body">
                 <h3>{item.role}</h3>
@@ -482,7 +489,9 @@ function App() {
         <div className="proof-card">
           <ShieldCheck size={24} />
           <strong>The Manthan Award, special mention</strong>
-          <span>Recognized for using information technology for social impact</span>
+          <span>
+            Recognized for using information technology for social impact
+          </span>
         </div>
       </section>
 
@@ -509,10 +518,10 @@ function App() {
             target="_blank"
             rel="noreferrer"
           >
-             <Network size={18} /> LinkedIn
+            <Network size={18} /> LinkedIn
           </a>
           <a href="https://github.com/rosnk" target="_blank" rel="noreferrer">
-             <Code2 size={18} /> GitHub
+            <Code2 size={18} /> GitHub
           </a>
         </div>
       </footer>
@@ -532,7 +541,7 @@ function App() {
         </span>
       </a>
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
